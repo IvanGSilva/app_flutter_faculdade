@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import './questao.dart';
+import './resposta.dart';
 
 void main() {
-  // [1] lembrar de chamar app senao n vai rodar.
   runApp(PerguntaAPP());
 }
 
@@ -30,12 +30,12 @@ class _PerguntaAppState extends State {
       ),
       body: Column(
         children: [
-          Text('Olá Flutter'),
+          
 
           Questao(perguntas[_perguntaSelecionada]),
-          ElevatedButton(onPressed: _responder, child: Text('Resposta 1')),
-          ElevatedButton(onPressed: _responder, child: Text('Resposta 2')), //
-          ElevatedButton(onPressed: _responder, child: Text('Resposta 3')),
+          Resposta('Resposta 1', _responder),
+          Resposta('Resposta 2', _responder),
+          Resposta('Resposta 3', _responder),
         ],
       ),
     ));
