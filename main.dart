@@ -10,6 +10,7 @@ class _PerguntaAppState extends State<PerguntaAPP> {
   var _perguntaSelecionada = 0;
   String _feedback = '';  // Feedback de resposta
   int _acertos = 0;  // Contador de acertos
+  int _erros = 0;    // Contador de erros
 
   // Função para avançar para a próxima pergunta ou reiniciar
   void _proximaPergunta() {
@@ -20,14 +21,15 @@ class _PerguntaAppState extends State<PerguntaAPP> {
         _perguntaSelecionada++;  // Avança para a próxima pergunta
       });
     } else {
-      // Verifica o resultado final
+      // Exibe o resultado final
       setState(() {
         if (_acertos == 3) {
-          _feedback = 'Você ganhou! 🎉';  // Acertou todas as perguntas
+          _feedback = 'Você ganhou! 🎉 Acertos: $_acertos, Erros: $_erros';  // Acertou todas as perguntas
         } else {
-          _feedback = 'Você não acertou todas, tente de novo. 😔';  // Errou alguma pergunta
+          _feedback = 'Você não acertou todas, tente de novo. 😔 Acertos: $_acertos, Erros: $_erros';  // Errou alguma pergunta
         }
         _acertos = 0; // Reseta os acertos
+        _erros = 0;   // Reseta os erros
         _perguntaSelecionada = 0; // Reinicia o quiz
       });
     }
@@ -40,11 +42,12 @@ class _PerguntaAppState extends State<PerguntaAPP> {
         _acertos++;  // Incrementa acertos
         _feedback = 'Você acertou! 🎉';
       } else {
+        _erros++;  // Incrementa erros
         _feedback = 'Resposta errada. Tente novamente. 😔';
       }
     });
 
-    // Avança para a próxima pergunta após um pequeno atraso (2 segundos)
+    // Avança para a próxima pergunta após um pequeno atraso (1 segundo)
     Future.delayed(Duration(seconds: 1), _proximaPergunta);
   }
 
